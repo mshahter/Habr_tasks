@@ -1,7 +1,25 @@
+/*
+ *      Tasks on js for FrontEnd interview. Tasks were taken from:      
+ *      https://habr.com/company/ruvds/blog/334538/
+ *      
+ */
+
+/*
+ *   1. Задание: Реализуйте функцию isPrime(), которая возвращает true или false, указывая, является ли переданное ей число простым.
+ *  
+ *      isPrime(0)                          // false
+ *      isPrime(1)                          // false
+ *      isPrime(17)                         // true
+ *      isPrime(10000000000000)             // false
+ *  
+ *      Решение:
+ */
+
+
 function isPrime(n) {
     let counter = 0;
     if (n == 1) {
-        console.log(false);
+        return false;
     }
     for (let i = 1; i <= n; i++) {
         if (n % i == 0) {
@@ -9,118 +27,42 @@ function isPrime(n) {
         }
     }
     if (counter > 2) {
-        console.log(false);
+        return false;
     } else {
-        console.log(true);
+        return true;
     }
 
 }
+console.log(isPrime(17)); //true;
+/*
+ *   2. Задача: Реализуйте функцию factorial(), которая возвращает факториал переданного ей числа.
+ *  
+ *      factorial(0)                        // 1
+ *      factorial(1)                        // 1
+ *      factorial(6)                        // 720
+ *  
+ *      Решение:
+ */
 
-
-function func(n) {
-    return Math.pow(n, 2);
-}
-
-
-let arr = [4, 12, 0, 9];
-
-function funcArr(n, arr) {
-    for (let i = 0; i < arr.length; i++) {
-        if (n == i) {
-            return arr[i];
-        }
-    }
-    for (let i = arr.length - 1; i >= 0; i++) {
-        if (n == i) {
-            return arr[i];
-        }
-    }
-}
-
-
-class Fraction {
-    constructor(m, n, znak) {
-
-        if (znak == '+') {
-            this.m = +m;
-            this.n = n;
-        } else if (znak == '-') {
-            this.m = -1 * m;
-            this.n = n;
-        }
-        if (this.m > this.n && this.m % this.n == 0) {
-            this.m /= this.n;
-            this.n = 1;
-        } else if (this.m < this.n && this.m % this.n == 0) {
-            this.n /= this.m;
-            this.m = 1;
-        } else {
-            this.m = this.n = 1;
-        }
-        //let self = this;
-    }
-    getM() {
-        return this.m;
-    }
-    getN() {
-        return this.n;
-    }
-    sum(obj) {
-
-        return (this.getM() * obj.getN() + this.getN() * obj.getM()) / (this.getN() * obj.getN());
-    }
-}
-
-let a = new Fraction(20, 5, '+');
-let b = new Fraction(12, 4, '+');
-
-function fac(n) {
+function factorial(n) {
     if (n == 1) {
         return 1;
     } else {
-        return n * fac(n - 1);
+        return n * factorial(n - 1);
     }
 }
-for (let i = 0; i < 15; i++) {
-    arr.push(Math.floor(100 * Math.random() - 50));
-}
+console.log(factorial(6));
 
-
-function isSorted(arr) {
-    let counter = 0;
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = i + 1; j < arr.length; j++) {
-            if (arr[i] > arr[j]) {
-                counter++;
-            }
-        }
-    }
-    if (counter == 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function filter(arr, condition) {
-    var filterArr = new Array();
-    for (var i = 0; i < arr.length; i++) {
-        if (condition(arr[i])) {
-            filterArr.push(arr[i]);
-        }
-    }
-    return filterArr;
-}
-console.log(filter([1, 2, 3, 4], n => n < 3));
-
-
-function reverse(str) {
-    let newStr = '';
-    for (let i = str.length - 1; i >= 0; i--) {
-        newStr += str[i];
-    }
-    return newStr;
-}
+/*
+ *   3. Задача: Реализуйте функцию fib(), возвращающую n-ное число Фибоначчи.
+ *  
+ *      fib(0)                              // 0
+ *      fib(1)                              // 1
+ *      fib(10)                             // 55
+ *      fib(20)                             // 6765
+ *  
+ *      Решение:
+ */
 
 function fib(n) {
     if (n == 0) {
@@ -139,6 +81,98 @@ function fib(n) {
     }
     return arr;
 }
+console.log(fib(20));
+
+/*
+ *   4. Задача: Реализуйте функцию isSorted(), которая возвращает true или false в зависимости о того, отсортирован ли переданный ей числовой массив.
+ *  
+ *      isSorted([])                        // true
+ *      isSorted([-Infinity, -5, 0, 3, 9])  // true
+ *      isSorted([3, 9, -3, 10])            // false
+ *  
+ *      Решение:
+ */
+
+function isSorted(arr) {
+    let counter = 0;
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length - 1; j++) {
+            if (arr[i] > arr[j]) {
+                counter++;
+            }
+        }
+    }
+    if (counter == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(isSorted([-Infinity, -5, 0, 3, 9]));
+
+
+/*
+ *   5. Создайте собственную реализацию функции filter().
+ *  
+ *      filter([1, 2, 3, 4], n => n < 3)    // [1, 2]
+ *  
+ *      Решение:
+ */
+
+
+function filter(arr, condition) {
+    var filterArr = new Array();
+    for (var i = 0; i < arr.length; i++) {
+        if (condition(arr[i])) {
+            filterArr.push(arr[i]);
+        }
+    }
+    return filterArr;
+}
+console.log(filter([1, 2, 3, 4], n => n < 3));
+
+/*
+ *   6. Создайте собственную реализацию функции reduce().
+ *  
+ *      reduce([1, 2, 3, 4], (a, b) => a + b, 0) // 10
+ *  
+ *      Решение:
+ */
+
+function reduce(arr, n) {
+    for (let i = 0; i < arr.length; i++) {
+        n += arr[i];
+    }
+    return n;
+}
+console.log(reduce([1, 2, 3, 4], 5));
+/*
+ *   7. Реализуйте функцию reverse(), которая обращает порядок следования символов переданной ей строки. Не пользуйтесь встроенной функцией reverse().
+ *  
+ *      reverse('')                         // ''
+ *      reverse('abcdef')                   // 'fedcba'
+ *      
+ *      Решение:
+ */
+
+function reverse(str) {
+    let newStr = '';
+    for (let i = str.length - 1; i >= 0; i--) {
+        newStr += str[i];
+    }
+    return newStr;
+}
+console.log(reverse('abcdef'));
+
+/*
+ *   8. Создайте собственную реализацию функции indexOf() для массивов.
+ *  
+ *      indexOf([1, 2, 3], 1)               // 0
+ *      indexOf([1, 2, 3], 4)               // -1
+ *      
+ *      Решение:
+ */
+
 
 function indexOf(arr, ind) {
     if (ind > arr.length - 1 || ind < 0) {
@@ -147,15 +181,21 @@ function indexOf(arr, ind) {
         return arr[ind];
     }
 }
+console.log(indexOf([1, 2, 3], 4));
 
-function reduce(arr, n) {
-    for (let i = 0; i < arr.length; i++) {
-        n += arr[i];
-    }
-    return n;
-}
+/*
+ *   9. Реализуйте функцию isPalindrome(), которая возвращает true или false в зависимости от того, 
+ *      является ли переданная ей строка палиндромом (функция нечувствительна к регистру и к наличию в строке пробелов).
+ *  
+ *      isPalindrome('')                                // true
+ *      isPalindrome('abcdcba')                         // true
+ *      isPalindrome('abcd')                            // false
+ *      isPalindrome('A man a plan a canal Panama')     // true
+ *      
+ *      Решение:
+ */
 
-function isPalindrom(str) {
+function isPalindrome(str) {
     if (str == '') {
         return true;
     }
@@ -175,6 +215,23 @@ function isPalindrom(str) {
         return false;
     }
 }
+console.log(isPalindrome('A man a plan a canal Panama'));
+
+/*  
+ *  10. Реализуйте функцию missing(), которая принимает неотсортированный массив уникальных чисел (то есть, 
+ *      числа в нём не повторяются) от 1 до некоего числа n, и возвращает число, отсутствующее в последовательности. 
+ *      Там может быть либо одно отсутствующее число, либо их может не быть вовсе.
+ *      Способны ли вы добиться того, чтобы функция решала задачу за время O(N)? Подсказка: есть одна хорошая формула, которой вы можете воспользоваться.
+ *  
+ *      missing([])                         // undefined
+ *      missing([1, 4, 3])                  // 2
+ *      missing([2, 3, 4])                  // 1
+ *      missing([5, 1, 4, 2])               // 3
+ *      missing([1, 2, 3, 4])               // undefined
+ *      
+ *      Решение:
+ *      Формула суммы арифмитической прогрессии: ((n * n) + n)/2;
+ */
 
 function missing(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -186,6 +243,20 @@ function missing(arr) {
     }
 }
 console.log(missing([5, 1, 4, 2]));
+
+
+/*  
+ *  11. Реализуйте функцию isBalanced() которая принимает строку и возвращает true или false, указывая на то, сбалансированы ли фигурные скобки, находящиеся в строке.
+ *  
+ *      isBalanced('}{')                      // false
+ *      isBalanced('{{}')                     // false
+ *      isBalanced('{}{}')                    // true
+ *      isBalanced('foo { bar { baz } boo }') // true
+ *      isBalanced('foo { bar { baz }')       // false
+ *      isBalanced('foo { bar } }')           // false
+ *      
+ *      Решение:
+ */
 
 function isBalanced(str) {
     let left = right = 0;
@@ -203,3 +274,4 @@ function isBalanced(str) {
         return false;
     }
 }
+console.log(isBalanced('foo { bar } }'));
